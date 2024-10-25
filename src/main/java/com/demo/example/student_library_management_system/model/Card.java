@@ -2,16 +2,24 @@ package com.demo.example.student_library_management_system.model;
 
 import com.demo.example.student_library_management_system.enums.CardStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "card")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Card {
 
     @Id
@@ -30,4 +38,14 @@ public class Card {
     @Column(name = "updated_date", nullable = false)
     @UpdateTimestamp // it adds the time when card is updated
     private Date updatedDate;
+
+    @OneToOne
+    @JoinColumn
+    private Student student;
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    private List<Book> booksIssuedTCard = new ArrayList<>();
+
+    @OneToMany(mappedBy = "card", cascade = CascadeType.ALL)
+    private List<Transaction> transactionList = new ArrayList<>();
 }

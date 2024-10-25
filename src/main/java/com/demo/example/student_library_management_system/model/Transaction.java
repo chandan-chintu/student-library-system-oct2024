@@ -2,7 +2,10 @@ package com.demo.example.student_library_management_system.model;
 
 import com.demo.example.student_library_management_system.enums.TransactionStatus;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.util.Date;
@@ -10,6 +13,9 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "transaction")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Transaction {
 
     @Id
@@ -30,5 +36,13 @@ public class Transaction {
 
     @Column(name = "is_issue_operation", nullable = false)
     private boolean isIssueOperation;
+
+    @ManyToOne
+    @JoinColumn
+    private Card card;
+
+    @ManyToOne
+    @JoinColumn
+    private Book book;
 
 }
