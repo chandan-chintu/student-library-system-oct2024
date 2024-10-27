@@ -5,7 +5,7 @@ import com.demo.example.student_library_management_system.model.Transaction;
 
 public class TransactionConverter {
 
-    public Transaction convertTransactionRequestDtoToTransaction(TransactionRequestDto transactionRequestDto){
+    public static Transaction convertTransactionRequestDtoToTransaction(TransactionRequestDto transactionRequestDto){
         Transaction transaction=Transaction.builder().transactionStatus(transactionRequestDto.getTransactionStatus())
                 .isIssueOperation(transactionRequestDto.isIssueOperation())
                 .fine(transactionRequestDto.getFine()).build();

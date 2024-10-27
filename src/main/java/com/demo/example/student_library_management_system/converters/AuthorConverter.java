@@ -5,7 +5,7 @@ import com.demo.example.student_library_management_system.model.Author;
 
 public class AuthorConverter {
 
-    public Author convertAuthorRequestDtoToAuthor(AuthorRequestDto authorRequestDto){
+    public static Author convertAuthorRequestDtoToAuthor(AuthorRequestDto authorRequestDto){
 
         Author author = Author.builder().name(authorRequestDto.getName()).email(authorRequestDto.getEmail())
                 .country(authorRequestDto.getCountry()).rating(authorRequestDto.getRating()).build();

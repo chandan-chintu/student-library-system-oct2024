@@ -12,7 +12,7 @@ public class TransactionRequestDto {
 
     private TransactionStatus transactionStatus;
     private double fine;
-    private boolean isIssueOperation;
+    private boolean issueOperation;
     private int bookId;
     private int cardId;
 }

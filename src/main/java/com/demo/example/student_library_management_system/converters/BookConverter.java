@@ -5,7 +5,7 @@ import com.demo.example.student_library_management_system.model.Book;
 
 public class BookConverter {
 
-    public Book convertBookRequestDtoToBook(BookRequestDto bookRequestDto){
+    public static Book convertBookRequestDtoToBook(BookRequestDto bookRequestDto){
 
         Book book = Book.builder().name(bookRequestDto.getName()).genre(bookRequestDto.getGenre())
                 .issuedToStudent(bookRequestDto.isIssuedToStudent()).pages(bookRequestDto.getPages())

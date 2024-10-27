@@ -5,7 +5,7 @@ import com.demo.example.student_library_management_system.model.Card;
 
 public class CardConverter {
 
-    public Card convertCardRequestDtoToCard(CardRequestDto cardRequestDto){
+    public static Card convertCardRequestDtoToCard(CardRequestDto cardRequestDto){
 
         Card card=Card.builder().cardStatus(cardRequestDto.getCardStatus()).build();
         return card;

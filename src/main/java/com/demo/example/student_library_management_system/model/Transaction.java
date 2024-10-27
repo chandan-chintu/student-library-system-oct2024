@@ -1,6 +1,7 @@
 package com.demo.example.student_library_management_system.model;
 
 import com.demo.example.student_library_management_system.enums.TransactionStatus;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,10 +38,12 @@ public class Transaction {
     @Column(name = "is_issue_operation", nullable = false)
     private boolean isIssueOperation;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn
     private Card card;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn
     private Book book;
