@@ -50,4 +50,22 @@ public class StudentController {
         String response = studentService.updateStudent(studentRequestDto,studentId);
         return response;
     }
+
+    @GetMapping("/findPage")
+    public List<Student> getAllStudentsWithPage(@RequestParam("pageNo") int pageNo, @RequestParam("pageSize") int pageSize, @RequestParam("sortInput") String sortInput){
+        List<Student> studentList = studentService.getAllStudentsByPage(pageNo,pageSize, sortInput);
+        return studentList;
+    }
+
+    @GetMapping("/findByEmail")
+    public Student getStudentByEmail(@RequestParam("email") String email){
+        Student student = studentService.getStudentByEmail(email);
+        return student;
+    }
+
+    @GetMapping("/findByEmailQuery")
+    public Student getStudentByEmailQuery(@RequestParam("email") String email){
+        Student student = studentService.getStudentByEmailQuery(email);
+        return student;
+    }
 }
