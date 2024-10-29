@@ -7,6 +7,8 @@ import com.demo.example.student_library_management_system.enums.CardStatus;
 import com.demo.example.student_library_management_system.model.Card;
 import com.demo.example.student_library_management_system.model.Student;
 import com.demo.example.student_library_management_system.repository.StudentRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +24,10 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
+    Logger logger = LoggerFactory.getLogger(StudentService.class);
+
     public String addStudent(StudentRequestDto studentRequestDto){
+        logger.info("addStudent method started");
         Student student  = StudentConverter.convertStudentRequestDtoToStudent(studentRequestDto);
         // whenever the student is created card is also created for that student
         Card card = new Card();
@@ -30,9 +35,9 @@ public class StudentService {
         card.setStudent(student);
 
         student.setCard(card);
-
+        logger.info("Stduent along with card is saving in database");
         studentRepository.save(student);
-
+        logger.info("addStudent method ended");
         return "Student and card are created";
 
 
@@ -40,6 +45,9 @@ public class StudentService {
 
     public List<Student> getAll(){
         List<Student> studentList = studentRepository.findAll();
+        if(studentList.isEmpty()){
+            throw new RuntimeException("Students are not present");
+        }
         return studentList;
     }
 
@@ -80,7 +88,13 @@ public class StudentService {
 
 
     public Student getStudentById(int studentId){
+        logger.info("getStudentById method started");
         Student student = studentRepository.findById(studentId).get();
+        if(student==null){
+            logger.error("student not found");
+            throw new RuntimeException();
+        }
+        logger.info("getStudentById method ended");
         return student;
     }
 
@@ -96,6 +110,9 @@ public class StudentService {
 
     public String updateStudent(StudentRequestDto studentRequestDto, int studentId){
         Student student = getStudentById(studentId);
+        if(student==null){
+            throw new RuntimeException("No student present with id : "+studentId);
+        }
         if(student!=null){
             student.setName(studentRequestDto.getName());
             student.setMobile(studentRequestDto.getMobile());
